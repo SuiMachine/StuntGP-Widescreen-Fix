@@ -38,12 +38,14 @@
             this.C_AutomaticAspect = new System.Windows.Forms.CheckBox();
             this.B_WriteToAFile = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LL_PCGW_link = new System.Windows.Forms.LinkLabel();
             this.L_Byte3 = new System.Windows.Forms.Label();
             this.L_Byte2 = new System.Windows.Forms.Label();
             this.L_Byte1 = new System.Windows.Forms.Label();
             this.L_Byte0 = new System.Windows.Forms.Label();
-            this.LL_PCGW_link = new System.Windows.Forms.LinkLabel();
+            this.P_Donate = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.P_Donate)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -116,7 +118,7 @@
             // 
             // B_WriteToAFile
             // 
-            this.B_WriteToAFile.Location = new System.Drawing.Point(91, 134);
+            this.B_WriteToAFile.Location = new System.Drawing.Point(101, 106);
             this.B_WriteToAFile.Name = "B_WriteToAFile";
             this.B_WriteToAFile.Size = new System.Drawing.Size(90, 23);
             this.B_WriteToAFile.TabIndex = 7;
@@ -126,6 +128,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.P_Donate);
             this.panel1.Controls.Add(this.LL_PCGW_link);
             this.panel1.Controls.Add(this.L_Byte3);
             this.panel1.Controls.Add(this.L_Byte2);
@@ -141,13 +144,24 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(196, 174);
+            this.panel1.Size = new System.Drawing.Size(196, 170);
             this.panel1.TabIndex = 8;
+            // 
+            // LL_PCGW_link
+            // 
+            this.LL_PCGW_link.AutoSize = true;
+            this.LL_PCGW_link.Location = new System.Drawing.Point(6, 139);
+            this.LL_PCGW_link.Name = "LL_PCGW_link";
+            this.LL_PCGW_link.Size = new System.Drawing.Size(78, 13);
+            this.LL_PCGW_link.TabIndex = 12;
+            this.LL_PCGW_link.TabStop = true;
+            this.LL_PCGW_link.Text = "PCGamingWiki";
+            this.LL_PCGW_link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LL_PCGW_link_LinkClicked);
             // 
             // L_Byte3
             // 
             this.L_Byte3.AutoSize = true;
-            this.L_Byte3.Location = new System.Drawing.Point(109, 84);
+            this.L_Byte3.Location = new System.Drawing.Point(172, 84);
             this.L_Byte3.Name = "L_Byte3";
             this.L_Byte3.Size = new System.Drawing.Size(19, 13);
             this.L_Byte3.TabIndex = 11;
@@ -156,7 +170,7 @@
             // L_Byte2
             // 
             this.L_Byte2.AutoSize = true;
-            this.L_Byte2.Location = new System.Drawing.Point(78, 84);
+            this.L_Byte2.Location = new System.Drawing.Point(118, 84);
             this.L_Byte2.Name = "L_Byte2";
             this.L_Byte2.Size = new System.Drawing.Size(19, 13);
             this.L_Byte2.TabIndex = 10;
@@ -165,7 +179,7 @@
             // L_Byte1
             // 
             this.L_Byte1.AutoSize = true;
-            this.L_Byte1.Location = new System.Drawing.Point(41, 84);
+            this.L_Byte1.Location = new System.Drawing.Point(60, 84);
             this.L_Byte1.Name = "L_Byte1";
             this.L_Byte1.Size = new System.Drawing.Size(19, 13);
             this.L_Byte1.TabIndex = 9;
@@ -180,22 +194,22 @@
             this.L_Byte0.TabIndex = 8;
             this.L_Byte0.Text = "00";
             // 
-            // LL_PCGW_link
+            // P_Donate
             // 
-            this.LL_PCGW_link.AutoSize = true;
-            this.LL_PCGW_link.Location = new System.Drawing.Point(6, 139);
-            this.LL_PCGW_link.Name = "LL_PCGW_link";
-            this.LL_PCGW_link.Size = new System.Drawing.Size(78, 13);
-            this.LL_PCGW_link.TabIndex = 12;
-            this.LL_PCGW_link.TabStop = true;
-            this.LL_PCGW_link.Text = "PCGamingWiki";
-            this.LL_PCGW_link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LL_PCGW_link_LinkClicked);
+            this.P_Donate.Image = global::StuntGP_widescreen.Properties.Resources.donatebutton;
+            this.P_Donate.Location = new System.Drawing.Point(109, 137);
+            this.P_Donate.Name = "P_Donate";
+            this.P_Donate.Size = new System.Drawing.Size(74, 21);
+            this.P_Donate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.P_Donate.TabIndex = 13;
+            this.P_Donate.TabStop = false;
+            this.P_Donate.Click += new System.EventHandler(this.P_Donate_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 193);
+            this.ClientSize = new System.Drawing.Size(224, 184);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -204,6 +218,7 @@
             this.Text = "StuntGP Widescreen fixer";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.P_Donate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,6 +239,7 @@
         private System.Windows.Forms.Label L_Byte1;
         private System.Windows.Forms.Label L_Byte0;
         private System.Windows.Forms.LinkLabel LL_PCGW_link;
+        private System.Windows.Forms.PictureBox P_Donate;
     }
 }
 

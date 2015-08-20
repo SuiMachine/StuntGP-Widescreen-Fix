@@ -17,6 +17,7 @@ namespace StuntGP_widescreen
         static string _GamesExecutable = "StuntGP_D3D.exe";
         static string _GamesExecutableBackup = "StuntGP_D3D.bak";
         static string PCGW_URL = "http://pcgamingwiki.com/";
+        static string donationURL = "https://www.twitchalerts.com/donate/suicidemachine";
 
         int width = 1280;
         int height = 720;
@@ -33,22 +34,30 @@ namespace StuntGP_widescreen
         public Form1()
         {
             InitializeComponent();
-            data = GetBytesFromAFile(@_GamesExecutable);
-
-            string s = BitConverter.ToString(data);
-
-            adress = findSequence(data, sequence, offset);
-
-            if(adress==-1)
+            if(!File.Exists(@_GamesExecutable))
             {
-                MessageBox.Show("Nothing found in the file. Sorry.");
+                MessageBox.Show("No executable found. Please place the file in a folder with a game.");
                 Close();
             }
             else
             {
-                Trace.WriteLine("Found address: 0x" + adress.ToString("X4"));
-                aspectRatio = BitConverter.ToSingle(data, adress);
-                TB_AspectRatio.Text = aspectRatio.ToString();
+                data = GetBytesFromAFile(@_GamesExecutable);
+
+                string s = BitConverter.ToString(data);
+
+                adress = findSequence(data, sequence, offset);
+
+                if (adress == -1)
+                {
+                    MessageBox.Show("Nothing found in the file. Sorry.");
+                    Close();
+                }
+                else
+                {
+                    Trace.WriteLine("Found address: 0x" + adress.ToString("X4"));
+                    aspectRatio = BitConverter.ToSingle(data, adress);
+                    TB_AspectRatio.Text = aspectRatio.ToString();
+                }
             }
         }
 
@@ -230,6 +239,11 @@ namespace StuntGP_widescreen
         private void LL_PCGW_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(PCGW_URL);
+        }
+
+        private void P_Donate_Click(object sender, EventArgs e)
+        {
+            Process.Start(donationURL);
         }
     }
 }
