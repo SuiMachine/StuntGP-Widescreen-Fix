@@ -43,9 +43,13 @@
             this.L_Byte2 = new System.Windows.Forms.Label();
             this.L_Byte1 = new System.Windows.Forms.Label();
             this.L_Byte0 = new System.Windows.Forms.Label();
-            this.P_Donate = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.donateLink = new System.Windows.Forms.LinkLabel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.P_Donate)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -128,7 +132,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.P_Donate);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.LL_PCGW_link);
             this.panel1.Controls.Add(this.L_Byte3);
             this.panel1.Controls.Add(this.L_Byte2);
@@ -142,9 +146,10 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.TB_AspectRatio);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 9);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(196, 170);
+            this.panel1.Size = new System.Drawing.Size(202, 161);
             this.panel1.TabIndex = 8;
             // 
             // LL_PCGW_link
@@ -194,22 +199,63 @@
             this.L_Byte0.TabIndex = 8;
             this.L_Byte0.Text = "00";
             // 
-            // P_Donate
+            // panel2
             // 
-            this.P_Donate.Image = global::StuntGP_widescreen.Properties.Resources.donatebutton;
-            this.P_Donate.Location = new System.Drawing.Point(109, 137);
-            this.P_Donate.Name = "P_Donate";
-            this.P_Donate.Size = new System.Drawing.Size(74, 21);
-            this.P_Donate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.P_Donate.TabIndex = 13;
-            this.P_Donate.TabStop = false;
-            this.P_Donate.Click += new System.EventHandler(this.P_Donate_Click);
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.donateLink);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 161);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(202, 57);
+            this.panel2.TabIndex = 9;
+            // 
+            // donateLink
+            // 
+            this.donateLink.AutoSize = true;
+            this.donateLink.Location = new System.Drawing.Point(85, 20);
+            this.donateLink.Name = "donateLink";
+            this.donateLink.Size = new System.Drawing.Size(46, 13);
+            this.donateLink.TabIndex = 12;
+            this.donateLink.TabStop = true;
+            this.donateLink.Text = "(donate)";
+            this.donateLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.donateLink_LinkClicked);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(42, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Credits:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "SuicideMachine";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 37);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "przemo509";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 184);
+            this.ClientSize = new System.Drawing.Size(202, 218);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -218,7 +264,8 @@
             this.Text = "StuntGP Widescreen fixer";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.P_Donate)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -239,7 +286,11 @@
         private System.Windows.Forms.Label L_Byte1;
         private System.Windows.Forms.Label L_Byte0;
         private System.Windows.Forms.LinkLabel LL_PCGW_link;
-        private System.Windows.Forms.PictureBox P_Donate;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel donateLink;
+        private System.Windows.Forms.Label label8;
     }
 }
 

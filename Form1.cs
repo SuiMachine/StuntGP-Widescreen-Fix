@@ -241,7 +241,7 @@ namespace StuntGP_widescreen
             Process.Start(PCGW_URL);
         }
 
-        private void P_Donate_Click(object sender, EventArgs e)
+        private void donateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(donationURL);
         }
