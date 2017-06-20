@@ -12,6 +12,19 @@ using System.Diagnostics;
 
 namespace StuntGP_widescreen
 {
+    public struct sequence
+    {
+        public byte[] byteSequence;
+        public int offset;
+
+        public sequence(byte[] byteSequence, int offset)
+        {
+            this.byteSequence = byteSequence;
+            this.offset = offset;
+        }
+    }
+
+
     public partial class Form1 : Form
     {
         static string _GamesExecutable = "StuntGP_D3D.exe";
@@ -23,10 +36,14 @@ namespace StuntGP_widescreen
         int height = 720;
         float aspectRatio = 1.7777777f;
 
-        byte[] sequence = { 0x00, 0x00, 0x00, 0xBE, 0x9F, 0xAA, 0x3F };
+        List<sequence> sequences = new List<sequence>()
+        {
+            new sequence(new byte[] { 0x80, 0xDC, 0x00, 0x00, 0x00, 0xBE, 0x9F, 0xAA, 0x3F, 0xC7, 0x80, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F }, 5),
+            new sequence(new byte[] { 0x80, 0xBC, 0x00, 0x00, 0x00, 0xBE, 0x9F, 0xAA, 0x3F, 0xC7, 0x80, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F }, 5)
+        };
+
         byte[] AspectAsArray = new byte[4];
         byte[] data;
-        int offset = 3;
         int adress = 0;
 
         bool autoCalculate = true;
@@ -34,18 +51,24 @@ namespace StuntGP_widescreen
         public Form1()
         {
             InitializeComponent();
-            if(!File.Exists(@_GamesExecutable))
+            if(!File.Exists(_GamesExecutable))
             {
                 MessageBox.Show("No executable found. Please place the file in a folder with a game.");
                 Close();
             }
             else
             {
-                data = GetBytesFromAFile(@_GamesExecutable);
+                data = GetBytesFromAFile(_GamesExecutable);
 
                 string s = BitConverter.ToString(data);
 
-                adress = findSequence(data, sequence, offset);
+                for(int i=0; i<sequences.Count; i++)
+                {
+                    adress = findSequence(data, sequences[i]);
+                    if (adress != -1)
+                        break;
+                }
+
 
                 if (adress == -1)
                 {
@@ -62,26 +85,33 @@ namespace StuntGP_widescreen
         }
 
         #region FindAdress
-        private int findSequence(byte[] source, byte[] _sequence, int offset)
+        private int findSequence(byte[] source, sequence _sequence)
         {
-            for (int adress = 0; adress < source.Length; adress++)
+            for (int tempAdress = 0; tempAdress < source.Length; tempAdress++)
             {
-                if(compareByteArrays(_sequence, source, adress))
+                if(compareByteArrays(_sequence, source, tempAdress))
                 {
-                    return adress + offset;
+                    return tempAdress + _sequence.offset;
                 }
             }
             return -1;
         }
 
-        private bool compareByteArrays(byte[] sequenceArray, byte[] dataArray, int dataOffset)
+        private bool compareByteArrays(sequence _sequence, byte[] dataArray, int dataOffset)
         {
-            if(dataArray.Length-dataOffset > sequenceArray.Length)
+            byte[] sequenceArray = _sequence.byteSequence;
+            int offset = _sequence.offset;
+
+            if (dataArray.Length-dataOffset > sequenceArray.Length)
             {
                 for (int i = 0; i<sequenceArray.Length; i++)
                 {
                     if (i == offset)
-                        i = i + 4;
+                    {
+                        i += 3;
+                        continue;
+                    }
+
 
                     if(sequenceArray[i]!=dataArray[dataOffset+i])
                     {
@@ -181,7 +211,7 @@ namespace StuntGP_widescreen
             FileStream fs = null;
             try
             {
-                fs = File.OpenRead(@filename);
+                fs = File.OpenRead(filename);
                 byte[] bytes = new byte[fs.Length];
                 fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
                 return bytes;
@@ -200,7 +230,7 @@ namespace StuntGP_widescreen
         {
             try
             {
-                File.WriteAllBytes(@filename, usedData);
+                File.WriteAllBytes(filename, usedData);
                 return true;
             }
             catch (Exception ex)
@@ -219,9 +249,9 @@ namespace StuntGP_widescreen
             data[adress + 3] = AspectAsArray[3];
 
             //Backup
-            if (!File.Exists(@_GamesExecutableBackup))
+            if (!File.Exists(_GamesExecutableBackup))
             {
-                File.Copy(@_GamesExecutable, @_GamesExecutableBackup);
+                File.Copy(_GamesExecutable, _GamesExecutableBackup);
             }
 
             bool success = true;
