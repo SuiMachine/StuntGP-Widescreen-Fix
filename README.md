@@ -4,6 +4,6 @@ A basic program for replacing aspect ratio bytes in exe file in order to fix str
 
 Credits
 -------
-  * [SuicideMachine](http://twitch.tv/suicidemachine)
+  * [SuicideMachine](http://twitch.tv/suimachine)
   * [przemo509](https://github.com/przemo509) - fix for different EXE file.
   
